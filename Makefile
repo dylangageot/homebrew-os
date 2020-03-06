@@ -12,7 +12,7 @@ INCLUDE_DIR = $(PWD)/include/
 UPLOAD_DIR = /var/lib/tftpboot/
 
 # Define specific file path.
-LKR_SCRIPT = ldscripts/link.lds
+LKR_SCRIPT = ldscripts/link.ld
 
 # Define compiler and linker flags.
 CFLAGS = \
