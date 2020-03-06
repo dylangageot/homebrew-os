@@ -26,7 +26,7 @@ LDFLAGS = \
 	 -nostartfiles \
 	 -T $(LKR_SCRIPT) \
 
-MODULES = boot rpi
+MODULES = boot rpi app
 
 all: $(BUILD_DIR)kernel.img
 
@@ -38,7 +38,7 @@ $(MODULES):
 $(BUILD_DIR)kernel.img: $(MODULES)
 	$(info -- Building kernel.img)
 	$(CROSS_COMPILE)gcc $(CFLAGS) $(wildcard $(BUILD_DIR)*.o) -o \
-		$(BUILD_DIR)kernel.elf $(LFLAGS) 
+		$(BUILD_DIR)kernel.elf $(LDFLAGS) 
 	$(CROSS_COMPILE)objcopy -O binary $(BUILD_DIR)kernel.elf \
 		$(BUILD_DIR)kernel.img
 
