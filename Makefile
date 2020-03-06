@@ -10,19 +10,20 @@ BUILD_DIR = $(PWD)/build/
 SRC_DIR = $(PWD)/src/
 INCLUDE_DIR = $(PWD)/include/
 UPLOAD_DIR = /var/lib/tftpboot/
-SRC_RPI_DIR = $(SRC_DIR)rpi/
 
 # Define specific file path.
 LKR_SCRIPT = ldscripts/link.lds
 
 # Define compiler and linker flags.
-CFLAGS = -mfpu=neon-vfpv4 \
+CFLAGS = \
+	 -mfpu=neon-vfpv4 \
 	 -mfloat-abi=hard \
 	 -march=armv7-a \
 	 -mtune=cortex-a7 \
 	 -O0 \
 	 -I$(INCLUDE_DIR)
-LFLAGS = -nostartfiles \
+LDFLAGS = \
+	 -nostartfiles \
 	 -T $(LKR_SCRIPT) \
 
 MODULES = boot rpi
