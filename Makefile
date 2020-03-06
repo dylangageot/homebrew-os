@@ -6,9 +6,9 @@
 CROSS_COMPILE ?= arm-none-eabi-
 
 # Define directories.
-BUILD_DIR = build/
-SRC_DIR = src/
-INCLUDE_DIR = include/
+BUILD_DIR = $(PWD)/build/
+SRC_DIR = $(PWD)/src/
+INCLUDE_DIR = $(PWD)/include/
 UPLOAD_DIR = /var/lib/tftpboot/
 SRC_RPI_DIR = $(SRC_DIR)rpi/
 
@@ -25,24 +25,24 @@ CFLAGS = -mfpu=neon-vfpv4 \
 LFLAGS = -nostartfiles \
 	 -T $(LKR_SCRIPT) \
 
-all: clean $(BUILD_DIR)kernel.img
+MODULES = boot rpi
 
-$(BUILD_DIR)%.o: $(SRC_DIR)%.c
-	$(CROSS_COMPILE)gcc $(CFLAGS) -c $^ -o $@
+all: $(BUILD_DIR)kernel.img
 
-$(BUILD_DIR)%.o: $(SRC_DIR)%.s
-	$(CROSS_COMPILE)gcc $(CFLAGS) -c $^ -o $@
+$(MODULES):		
+	$(info -- Building $@)
+	$(MAKE) -C $(SRC_DIR)$@ CROSS_COMPILE=$(CROSS_COMPILE) \
+		CFLAGS="$(CFLAGS)" BUILD_DIR=$(BUILD_DIR)
 
-$(BUILD_DIR)%.o: $(SRC_RPI_DIR)%.s
-	$(CROSS_COMPILE)gcc $(CFLAGS) -c $^ -o $@
-
-$(BUILD_DIR)kernel.img: $(BUILD_DIR)main.o $(BUILD_DIR)start.o \
-       	$(BUILD_DIR)cstartup.o $(BUILD_DIR)system_timer.o
-	$(CROSS_COMPILE)gcc $(CFLAGS) $^ -o $(BUILD_DIR)kernel.elf $(LFLAGS)
+$(BUILD_DIR)kernel.img: $(MODULES)
+	$(info -- Building kernel.img)
+	$(CROSS_COMPILE)gcc $(CFLAGS) $(wildcard $(BUILD_DIR)*.o) -o \
+		$(BUILD_DIR)kernel.elf $(LFLAGS) 
 	$(CROSS_COMPILE)objcopy -O binary $(BUILD_DIR)kernel.elf \
 		$(BUILD_DIR)kernel.img
 
 upload: $(BUILD_DIR)kernel.img
+	$(info -- Clean)
 	rm -f $(UPLOAD_DIR)kernel*
 	cp $^ $(UPLOAD_DIR)
 

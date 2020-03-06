@@ -4,7 +4,7 @@
  * 	This module provide basic functions to use the system timer.
  */
 
-// Codes section.
+// Code section.
 .section ".text"
 
 // Symbol declarations.

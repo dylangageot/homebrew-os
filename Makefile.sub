@@ -1,0 +1,12 @@
+CSRC = $(wildcard *.c)
+SSRC = $(wildcard *.s)
+OBJ = $(patsubst %.c, $(BUILD_DIR)%.o, $(CSRC)) \
+      $(patsubst %.s, $(BUILD_DIR)%.o, $(SSRC))
+
+all: $(OBJ)
+
+$(BUILD_DIR)%.o: %.c
+	$(CROSS_COMPILE)gcc $(CFLAGS) -c $^ -o $@
+
+$(BUILD_DIR)%.o: %.s
+	$(CROSS_COMPILE)gcc $(CFLAGS) -c $^ -o $@
