@@ -3,20 +3,18 @@ project(rpios C ASM)
 
 #set(CMAKE_VERBOSE_MAKEFILE true)
 
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
-
+# Set ARM compiler for C, C++ and ASM.
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
+# Include headers files from "include/".
 include_directories(include/)
 
-# Include sources files
+# Include sources files from "src/".
 file(GLOB_RECURSE SRC_FILES src/*) 
 
+# Set target name, cflags and path of the linker script.
 set(TARGET_NAME rpios)
 set(CMAKE_C_FLAGS "-mcpu=cortex-a7 -O0")
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/ldscripts/link.ld)
