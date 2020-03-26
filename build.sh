@@ -4,7 +4,7 @@ echo '\e[93mStep 1: Building rpios\e[m'
 rm -rf build
 mkdir build
 cd build
-cmake ..
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/arm-toolchain.cmake
 make
 
 echo '\e[93mStep 2: Extracting rpios binary\e[m'

@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(rpios C ASM)
 
-#set(CMAKE_VERBOSE_MAKEFILE true)
+# Set Makefile verbose off
+set(CMAKE_VERBOSE_MAKEFILE true)
 
-# Set ARM compiler for C, C++ and ASM.
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
+# Set crosscompiling variable to true.
+SET(CMAKE_CROSSCOMPILING 1)
 
 # Include headers files from "include/".
 include_directories(include/)
