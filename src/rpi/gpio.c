@@ -1,16 +1,19 @@
 #include "rpi/gpio.h"
-#include <stdint.h>
 
-volatile uint32_t* gpio = (uint32_t*) RPI_GPIO_BASE;
+static uint32_t* gpio = (uint32_t*) RPI_GPIO_BASE;
+
+uint32_t* rpi_gpio_get(void) {
+    return gpio;
+}
 
 void rpi_act_led_init(void) {
-	gpio[RPI_LED_GPFSEL] = (1 << RPI_LED_GPFBIT);	
+    gpio[RPI_ACT_LED_GPFSEL] = 1UL << RPI_ACT_LED_GPFBIT;
 }
 
 void rpi_act_led_on(void) {
-	gpio[RPI_LED_GPSET] = (1 << RPI_LED_GPSBIT);	
+	gpio[RPI_ACT_LED_GPSET] = 1UL << RPI_ACT_LED_GPSBIT;
 }
 
 void rpi_act_led_off(void) {
-	gpio[RPI_LED_GPCLR] = (1 << RPI_LED_GPSBIT);	
+	gpio[RPI_ACT_LED_GPCLR] = 1UL << RPI_ACT_LED_GPSBIT;
 }

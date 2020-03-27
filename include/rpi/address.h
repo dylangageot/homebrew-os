@@ -9,9 +9,9 @@
 #define RPI_ADDRESS_H
 
 /* Peripheral base address */
-#define RPI_PERIPHERAL_BASE 0x3F000000UL
+#define RPI_PERIPHERAL_BASE     0x3F000000UL
 
 /* System Timer base address */
-#define RPI_TIMER_BASE (PERIPHERAL_BASE + 0x3000UL)
+#define RPI_TIMER_BASE          (PERIPHERAL_BASE + 0x3000UL)
 
 #endif /* RPI_ADDRESS_H */

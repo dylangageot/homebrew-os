@@ -18,9 +18,9 @@
  */
 udelay:
 	// Load Timer Base Address into r1.
-	ldr 	r1, 	=TIMER_BASE
+	ldr r1, =TIMER_BASE
 	// Initial counter value loaded into r2.
-	ldr 	r2,	[r1, #4]
+	ldr r2,	[r1, #4]
 
 	// Comparaison loop.
 __delay_loop:
