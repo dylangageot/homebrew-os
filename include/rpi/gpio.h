@@ -45,6 +45,7 @@ typedef struct {
 #define RPI_GPIO_BASE       (RPI_PERIPHERAL_BASE + 0x200000UL)
 
 /* Function Select values */
+#define RPI_GPIO_GPFSEL_SIZE 3UL
 #define RPI_GPIO_GPFSEL_IN   0UL
 #define RPI_GPIO_GPFSEL_OUT  1UL
 #define RPI_GPIO_GPFSEL_AF0  4UL
@@ -55,6 +56,7 @@ typedef struct {
 #define RPI_GPIO_GPFSEL_AF5  2UL
 
 /* Pull-up/down values */
+#define RPI_GPIO_GPPUD_SIZE  2UL
 #define RPI_GPIO_GPPUD_OFF   0UL
 #define RPI_GPIO_GPPUD_DW    1UL
 #define RPI_GPIO_GPPUD_UP    2UL
