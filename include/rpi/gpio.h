@@ -11,63 +11,38 @@
 #include "address.h"
 #include <stdint.h>
 
+/**
+ * GPIO controller.
+ */
+typedef struct {
+    volatile uint32_t GPFSEL[6];
+    volatile uint32_t _reserved1;
+    volatile uint32_t GPSET[2];
+    volatile uint32_t _reserved2;
+    volatile uint32_t GPCLR[2];
+    volatile uint32_t _reserved;
+    volatile uint32_t GPLEV[2];
+    volatile uint32_t _reserved3;
+    volatile uint32_t GPEDS[2];
+    volatile uint32_t _reserved4;
+    volatile uint32_t GPREN[2];
+    volatile uint32_t _reserved5;
+    volatile uint32_t GPFEN[2];
+    volatile uint32_t _reserved6;
+    volatile uint32_t GPHEN[2];
+    volatile uint32_t _reserved7;
+    volatile uint32_t GPLEN[2];
+    volatile uint32_t _reserved8;
+    volatile uint32_t GPAREN[2];
+    volatile uint32_t _reserved9;
+    volatile uint32_t GPAFEN[2];
+    volatile uint32_t _reserved10;
+    volatile uint32_t GPPUD;
+    volatile uint32_t GPPUDCLK[2];
+} rpi_gpio_controller_t;
+
 /* GPIO base address */
 #define RPI_GPIO_BASE       (RPI_PERIPHERAL_BASE + 0x200000UL)
-
-/* GPIO Function Select index */
-#define RPI_GPIO_GPFSEL0    0UL
-#define RPI_GPIO_GPFSEL1    1UL
-#define RPI_GPIO_GPFSEL2    2UL
-#define RPI_GPIO_GPFSEL3    3UL
-#define RPI_GPIO_GPFSEL4    4UL
-#define RPI_GPIO_GPFSEL5    5UL
-
-/* GPIO Set index */
-#define RPI_GPIO_GPSET0     7UL
-#define RPI_GPIO_GPSET1     8UL
-
-/* GPIO Clear index */
-#define RPI_GPIO_GPCLR0     10UL
-#define RPI_GPIO_GPCLR1     11UL
-
-/* GPIO Pin Level index */
-#define RPI_GPIO_GPLEV0     13UL
-#define RPI_GPIO_GPLEV1     14UL
-
-/* GPIO Pin Event Detect Status index */
-#define RPI_GPIO_GPEDS0     16UL
-#define RPI_GPIO_GPEDS1     17UL
-
-/* GPIO Pin Rising Edge Detect Enable index */
-#define RPI_GPIO_GPREN0     19UL
-#define RPI_GPIO_GPREN1     20UL
-
-/* GPIO Pin Falling Edge Detect Enable index */
-#define RPI_GPIO_GPFEN0     22UL
-#define RPI_GPIO_GPFEN1     23UL
-
-/* GPIO Pin High Detect Enable index */
-#define RPI_GPIO_GPHEN0     25UL
-#define RPI_GPIO_GPHEN1     26UL
-
-/* GPIO Pin High Detect Enable index */
-#define RPI_GPIO_GPLEN0     28UL
-#define RPI_GPIO_GPLEN1     29UL
-
-/* GPIO Pin Async Rising Edge Detect index */
-#define RPI_GPIO_GPAREN0    31UL
-#define RPI_GPIO_GPAREN1    32UL
-
-/* GPIO Pin Async Rising Edge Detect index */
-#define RPI_GPIO_GPAFEN0    34UL
-#define RPI_GPIO_GPAFEN1    35UL
-
-/* GPIO Pin Pull-up/down Enable index */
-#define RPI_GPIO_GPPUD      37UL
-
-/* GPIO Pin Pull-up/down Enable Clock index */
-#define RPI_GPIO_GPPUDCLK0  38UL
-#define RPI_GPIO_GPPUDCLK1  39UL
 
 /* Function Select values */
 #define RPI_GPIO_GPFSEL_IN   0UL
@@ -85,16 +60,16 @@
 #define RPI_GPIO_GPPUD_UP    2UL
 
 /* ACT LED */
-#define RPI_ACT_LED_GPFSEL   RPI_GPIO_GPFSEL4
+#define RPI_ACT_LED_GPFSEL   4
 #define RPI_ACT_LED_GPFBIT   21UL
-#define RPI_ACT_LED_GPSET    RPI_GPIO_GPSET1
-#define RPI_ACT_LED_GPCLR    RPI_GPIO_GPCLR1
+#define RPI_ACT_LED_GPSET    1
+#define RPI_ACT_LED_GPCLR    1
 #define RPI_ACT_LED_GPSBIT   15UL
 
 /**
- * @return GPIO base address
+ * @return GPIO controller pointer.
  */
-uint32_t* rpi_gpio_get(void);
+rpi_gpio_controller_t* rpi_get_gpio_controller(void);
 
 /**
  * Init GPIO for the ACT LED.
