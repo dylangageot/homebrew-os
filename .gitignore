@@ -2,3 +2,5 @@ build/*
 *.o
 *.elf
 *.img
+.idea/
+cmake-*
