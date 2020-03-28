@@ -1,8 +1,8 @@
 #include "rpi/gpio.h"
 
-static rpi_gpio_controller_t* gpio = (rpi_gpio_controller_t*) RPI_GPIO_BASE;
+static rpi_gpio_t* gpio = (rpi_gpio_t*) RPI_GPIO_BASE;
 
-rpi_gpio_controller_t* rpi_get_gpio_controller(void) {
+rpi_gpio_t* rpi_get_gpio(void) {
     return gpio;
 }
 

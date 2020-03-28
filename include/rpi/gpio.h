@@ -12,7 +12,7 @@
 #include <stdint.h>
 
 /**
- * GPIO controller.
+ * GPIO structure.
  */
 typedef struct {
     volatile uint32_t GPFSEL[6];
@@ -39,7 +39,7 @@ typedef struct {
     volatile uint32_t _reserved10;
     volatile uint32_t GPPUD;
     volatile uint32_t GPPUDCLK[2];
-} rpi_gpio_controller_t;
+} rpi_gpio_t;
 
 /* GPIO base address */
 #define RPI_GPIO_BASE       (RPI_PERIPHERAL_BASE + 0x200000UL)
@@ -71,7 +71,7 @@ typedef struct {
 /**
  * @return GPIO controller pointer.
  */
-rpi_gpio_controller_t* rpi_get_gpio_controller(void);
+rpi_gpio_t* rpi_get_gpio(void);
 
 /**
  * Init GPIO for the ACT LED.
