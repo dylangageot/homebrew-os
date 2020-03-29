@@ -25,6 +25,11 @@ int main(void) {
 //
 //    rpi_irq_enable();
 
+
+    rpi_act_led_off();
+
+    rpi_uart_init();
+
     char i = 0;
     char buffer[30];
     for (i = (char) 'a'; i <= (char) 'z'; ++i) {
@@ -33,7 +38,7 @@ int main(void) {
 
     rpi_uart_send_bytes((uint8_t*) buffer, 'z' - 'a' + 1);
 
-    rpi_act_led_on();
+    rpi_uart_send_hex_uint32(0xABCDEF79);
 
 	return 0;
 }

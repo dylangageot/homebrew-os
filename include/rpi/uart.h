@@ -20,6 +20,7 @@ typedef struct {
     volatile uint32_t RSRECR;
     volatile uint32_t _reserved1[4];
     volatile uint32_t FR;
+    volatile uint32_t _reserved2;
     volatile uint32_t ILPR;
     volatile uint32_t IBRD;
     volatile uint32_t FBRD;
@@ -31,7 +32,7 @@ typedef struct {
     volatile uint32_t MIS;
     volatile uint32_t ICR;
     volatile uint32_t DMACR;
-    volatile uint32_t _reserved2[17];
+    volatile uint32_t _reserved3[17];
     volatile uint32_t ITCR;
     volatile uint32_t ITIP;
     volatile uint32_t ITOP;
@@ -67,6 +68,11 @@ typedef struct {
 rpi_uart_t* rpi_get_uart(void);
 
 /**
+ * Init UART.
+ */
+void rpi_uart_init(void);
+
+/**
  * Sends a single byte through UART.
  * @param data Byte to send.
  */
@@ -78,5 +84,11 @@ void rpi_uart_send_byte(uint8_t data);
  * @param size Number of bytes.
  */
 void rpi_uart_send_bytes(uint8_t* data, uint32_t size);
+
+/**
+ * Sends the hex format of a uint32 value.
+ * @param data Data to print in hex format.
+ */
+void rpi_uart_send_hex_uint32(uint32_t data);
 
 #endif /* RPI_UART_H */
