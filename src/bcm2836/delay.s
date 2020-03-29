@@ -8,15 +8,15 @@
 .section ".text"
 
 // Symbol declarations.
-.global udelay
+.global bcm2836_system_timer_wait
 
 // Constant defintions.
 .equ TIMER_BASE, 0x3F003000
 
 /* Wait for a given number of microseconds.
- * void udelay(unsigned int us);
+ * void bcm2836_system_timer_wait(unsigned int us);
  */
-udelay:
+bcm2836_system_timer_wait:
 	// Load Timer Base Address into r1.
 	ldr r1, =TIMER_BASE
 	// Initial counter value loaded into r2.

@@ -19,6 +19,6 @@ set(CMAKE_C_FLAGS "-mcpu=cortex-a7 -O0")
 set(CMAKE_ASM_FLAGS "-mcpu=cortex-a7 -O0")
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/ldscript/link.ld)
 
-add_executable(${TARGET_NAME} ${SRC_FILES} include/rpi/mailbox.h)
+add_executable(${TARGET_NAME} ${SRC_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS 
 	"-nostartfiles -T ${LINKER_SCRIPT}")

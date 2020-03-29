@@ -1,8 +1,8 @@
-#include "rpi/gpio.h"
+#include "bcm2836/gpio.h"
 
-static rpi_gpio_t* gpio = (rpi_gpio_t*) RPI_GPIO_BASE;
+static bcm2836_gpio_t* gpio = (bcm2836_gpio_t*) BCM2836_GPIO_BASE;
 
-rpi_gpio_t* rpi_get_gpio(void) {
+bcm2836_gpio_t* bcm2836_get_gpio(void) {
     return gpio;
 }
 

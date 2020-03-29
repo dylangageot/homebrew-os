@@ -1,32 +1,28 @@
-#include "rpi/arm_timer.h"
-#include "rpi/gpio.h"
-#include "rpi/delay.h"
+#include <bcm2836/arm_timer.h>
+#include <bcm2836/uart.h>
 
 void __attribute__((interrupt("UNDEF"))) undefined_instruction_vector(void) {
-	rpi_act_led_on();
+
 	while (1) {};
 }
 
 void __attribute__((interrupt("SWI"))) software_interrupt_vector(void) {
-    rpi_act_led_off();
+
 	while (1) {};
 }
 
 void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void) {
-    rpi_act_led_off();
+
 	while (1) {};
 }
 
 void __attribute__((interrupt("IRQ")))  interrupt_vector(void) {
-	while (1) {
-		rpi_act_led_on();
-		udelay(5e5);
-		rpi_act_led_off();
-		udelay(5e5);
-	}
+    // Clear IRQ
+	bcm2836_get_arm_timer()->IRQClear = 1;
+	bcm2836_uart_send_byte('.');
 }
 
 void __attribute__((interrupt("FIQ"))) fast_interrupt_vector(void) {
-    rpi_act_led_off();
+
 	while (1) {};
 }

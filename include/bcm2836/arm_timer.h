@@ -1,30 +1,38 @@
-#ifndef RPI_ARM_TIMER_H
-#define RPI_ARM_TIMER_H
+/**
+ * @file arm_timer.h
+ * @brief Define and prototype for the BCM2836 ARM Timer.
+ * @author Dylan Gageot
+ * @version 1.0
+ * @date 2020-03-29
+ */
+#ifndef BCM2836_ARM_TIMER_H
+#define BCM2836_ARM_TIMER_H
 
 #include "address.h"
 #include <stdint.h>
 
 /** @brief See the documentation for the ARM side timer (Section 14 of the
   BCM2835 Peripherals PDF) */
-#define RPI_ARMTIMER_BASE               ( RPI_PERIPHERAL_BASE + 0xB400 )
+#define BCM2836_ARMTIMER_BASE               ( BCM2836_PERIPHERAL_BASE + 0xB400 )
 
 /** @brief 0 : 16-bit counters - 1 : 23-bit counter */
-#define RPI_ARMTIMER_CTRL_23BIT         ( 1 << 1 )
+#define BCM2836_ARMTIMER_CTRL_23BIT         ( 1 << 1 )
 
-#define RPI_ARMTIMER_CTRL_PRESCALE_1    ( 0 << 2 )
-#define RPI_ARMTIMER_CTRL_PRESCALE_16   ( 1 << 2 )
-#define RPI_ARMTIMER_CTRL_PRESCALE_256  ( 2 << 2 )
+#define BCM2836_ARMTIMER_CTRL_PRESCALE_1    ( 0 << 2 )
+#define BCM2836_ARMTIMER_CTRL_PRESCALE_16   ( 1 << 2 )
+#define BCM2836_ARMTIMER_CTRL_PRESCALE_256  ( 2 << 2 )
 
 /** @brief 0 : Timer interrupt disabled - 1 : Timer interrupt enabled */
-#define RPI_ARMTIMER_CTRL_INT_ENABLE    ( 1 << 5 )
-#define RPI_ARMTIMER_CTRL_INT_DISABLE   ( 0 << 5 )
+#define BCM2836_ARMTIMER_CTRL_INT_ENABLE    ( 1 << 5 )
+#define BCM2836_ARMTIMER_CTRL_INT_DISABLE   ( 0 << 5 )
 
 /** @brief 0 : Timer disabled - 1 : Timer enabled */
-#define RPI_ARMTIMER_CTRL_ENABLE        ( 1 << 7 )
-#define RPI_ARMTIMER_CTRL_DISABLE       ( 0 << 7 )
+#define BCM2836_ARMTIMER_CTRL_ENABLE        ( 1 << 7 )
+#define BCM2836_ARMTIMER_CTRL_DISABLE       ( 0 << 7 )
 
-/** @brief Section 14.2 of the BCM2835 Peripherals documentation details
-  the register layout for the ARM side timer */
+/**
+ * ARM Timer structure.
+ */
 typedef struct {
 
 	/** The timer load register sets the time for the timer to count down.
@@ -100,14 +108,12 @@ typedef struct {
 	  This register will be halted too if bit 8 of the control register is
 	  set and the ARM is in Debug Halt mode. */
 	volatile uint32_t FreeRunningCounter;
-
-} rpi_arm_timer_t;
+	
+} bcm2836_arm_timer_t;
 
 /**
- * @brief Get the register structure for the ARM Timer.
- *
- * @return Pointer to the register structure.
+ * @return ARM Timer structure pointer.
  */
-rpi_arm_timer_t* rpi_get_arm_timer(void);
+bcm2836_arm_timer_t* bcm2836_get_arm_timer(void);
 
 #endif

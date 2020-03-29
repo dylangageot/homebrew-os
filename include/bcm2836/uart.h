@@ -5,8 +5,8 @@
  * @version 1.0
  * @date 2020-03-27
  */
-#ifndef RPI_UART_H
-#define RPI_UART_H
+#ifndef BCM2836_UART_H
+#define BCM2836_UART_H
 
 #include "address.h"
 #include "gpio.h"
@@ -37,58 +37,58 @@ typedef struct {
     volatile uint32_t ITIP;
     volatile uint32_t ITOP;
     volatile uint32_t TDR;
-} rpi_uart_t;
+} bcm2836_uart_t;
 
 /* UART base address */
-#define RPI_UART_BASE       (RPI_PERIPHERAL_BASE + 0x201000UL)
+#define BCM2836_UART_BASE       (BCM2836_PERIPHERAL_BASE + 0x201000UL)
 
 /* UART DR flags */
-#define RPI_UART_DR_OE      (1UL << 11UL)
-#define RPI_UART_DR_BE      (1UL << 10UL)
-#define RPI_UART_DR_PE      (1UL << 9UL)
-#define RPI_UART_DR_FE      (1UL << 8UL)
+#define BCM2836_UART_DR_OE      (1UL << 11UL)
+#define BCM2836_UART_DR_BE      (1UL << 10UL)
+#define BCM2836_UART_DR_PE      (1UL << 9UL)
+#define BCM2836_UART_DR_FE      (1UL << 8UL)
 
 /* UART RSRECR flags */
-#define RPI_UART_RSRECR_OE  (1UL << 3UL)
-#define RPI_UART_RSRECR_BE  (1UL << 2UL)
-#define RPI_UART_RSRECR_PE  (1UL << 1UL)
-#define RPI_UART_RSRECR_FE  (1UL << 0UL)
+#define BCM2836_UART_RSRECR_OE  (1UL << 3UL)
+#define BCM2836_UART_RSRECR_BE  (1UL << 2UL)
+#define BCM2836_UART_RSRECR_PE  (1UL << 1UL)
+#define BCM2836_UART_RSRECR_FE  (1UL << 0UL)
 
 /* UART FR flags */
-#define RPI_UART_FR_TXFE    (1UL << 7UL)
-#define RPI_UART_FR_RXFF    (1UL << 6UL)
-#define RPI_UART_FR_TXFF    (1UL << 5UL)
-#define RPI_UART_FR_RXFE    (1UL << 4UL)
-#define RPI_UART_FR_BUSY    (1UL << 3UL)
-#define RPI_UART_FR_CTS     (1UL << 0UL)
+#define BCM2836_UART_FR_TXFE    (1UL << 7UL)
+#define BCM2836_UART_FR_RXFF    (1UL << 6UL)
+#define BCM2836_UART_FR_TXFF    (1UL << 5UL)
+#define BCM2836_UART_FR_RXFE    (1UL << 4UL)
+#define BCM2836_UART_FR_BUSY    (1UL << 3UL)
+#define BCM2836_UART_FR_CTS     (1UL << 0UL)
 
 /**
  * @return UART structure pointer.
  */
-rpi_uart_t* rpi_get_uart(void);
+bcm2836_uart_t* bcm2836_get_uart(void);
 
 /**
  * Init UART.
  */
-void rpi_uart_init(void);
+void bcm2836_uart_init(void);
 
 /**
  * Sends a single byte through UART.
  * @param data Byte to send.
  */
-void rpi_uart_send_byte(uint8_t data);
+void bcm2836_uart_send_byte(uint8_t data);
 
 /**
  * Sends a bytes vector through UART.
  * @param data Bytes to send.
  * @param size Number of bytes.
  */
-void rpi_uart_send_bytes(uint8_t* data, uint32_t size);
+void bcm2836_uart_send_bytes(uint8_t* data, uint32_t size);
 
 /**
  * Sends the hex format of a uint32 value.
  * @param data Data to print in hex format.
  */
-void rpi_uart_send_hex_uint32(uint32_t data);
+void bcm2836_uart_send_hex_uint32(uint32_t data);
 
-#endif /* RPI_UART_H */
+#endif /* BCM2836_UART_H */

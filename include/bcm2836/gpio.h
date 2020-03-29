@@ -5,8 +5,8 @@
  * @version 1.0
  * @date 2020-03-07
  */
-#ifndef RPI_GPIO_H
-#define RPI_GPIO_H
+#ifndef BCM2836_GPIO_H
+#define BCM2836_GPIO_H
 
 #include "address.h"
 #include <stdint.h>
@@ -39,42 +39,42 @@ typedef struct {
     volatile uint32_t _reserved10;
     volatile uint32_t GPPUD;
     volatile uint32_t GPPUDCLK[2];
-} rpi_gpio_t;
+} bcm2836_gpio_t;
 
 /* GPIO base address */
-#define RPI_GPIO_BASE       (RPI_PERIPHERAL_BASE + 0x200000UL)
+#define BCM2836_GPIO_BASE           (BCM2836_PERIPHERAL_BASE + 0x200000UL)
 
 /* Function Select values */
-#define RPI_GPIO_GPFSEL_SIZE 3UL
-#define RPI_GPIO_GPFSEL_IN   0UL
-#define RPI_GPIO_GPFSEL_OUT  1UL
-#define RPI_GPIO_GPFSEL_AF0  4UL
-#define RPI_GPIO_GPFSEL_AF1  5UL
-#define RPI_GPIO_GPFSEL_AF2  6UL
-#define RPI_GPIO_GPFSEL_AF3  7UL
-#define RPI_GPIO_GPFSEL_AF4  3UL
-#define RPI_GPIO_GPFSEL_AF5  2UL
+#define BCM2836_GPIO_GPFSEL_SIZE    3UL
+#define BCM2836_GPIO_GPFSEL_IN      0UL
+#define BCM2836_GPIO_GPFSEL_OUT     1UL
+#define BCM2836_GPIO_GPFSEL_AF0     4UL
+#define BCM2836_GPIO_GPFSEL_AF1     5UL
+#define BCM2836_GPIO_GPFSEL_AF2     6UL
+#define BCM2836_GPIO_GPFSEL_AF3     7UL
+#define BCM2836_GPIO_GPFSEL_AF4     3UL
+#define BCM2836_GPIO_GPFSEL_AF5     2UL
 
 /* Pull-up/down values */
-#define RPI_GPIO_GPPUD_SIZE  2UL
-#define RPI_GPIO_GPPUD_OFF   0UL
-#define RPI_GPIO_GPPUD_DW    1UL
-#define RPI_GPIO_GPPUD_UP    2UL
+#define BCM2836_GPIO_GPPUD_SIZE     2UL
+#define BCM2836_GPIO_GPPUD_OFF      0UL
+#define BCM2836_GPIO_GPPUD_DW       1UL
+#define BCM2836_GPIO_GPPUD_UP       2UL
 
 /* ACT LED */
-#define RPI_ACT_LED_GPFSEL   4
-#define RPI_ACT_LED_GPFBIT   21UL
-#define RPI_ACT_LED_GPSET    1
-#define RPI_ACT_LED_GPCLR    1
-#define RPI_ACT_LED_GPSBIT   15UL
+#define RPI_ACT_LED_GPFSEL          4
+#define RPI_ACT_LED_GPFBIT          21UL
+#define RPI_ACT_LED_GPSET           1
+#define RPI_ACT_LED_GPCLR           1
+#define RPI_ACT_LED_GPSBIT          15UL
 
 /**
- * @return GPIO controller pointer.
+ * @return GPIO structure pointer.
  */
-rpi_gpio_t* rpi_get_gpio(void);
+bcm2836_gpio_t* bcm2836_get_gpio(void);
 
 /**
- * Init GPIO for the ACT LED.
+ * Initializes GPIO for the ACT LED.
  */
 void rpi_act_led_init(void);
 /**
@@ -87,4 +87,4 @@ void rpi_act_led_on(void);
  */
 void rpi_act_led_off(void);
 
-#endif /* RPI_GPIO_H */
+#endif /* BCM2836_GPIO_H */
