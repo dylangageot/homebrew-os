@@ -16,7 +16,7 @@ void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void) {
 	while (1) {};
 }
 
-void __attribute__((interrupt("IRQ")))  interrupt_vector(void) {
+void  interrupt_vector(void) {
     // Clear IRQ
 	bcm2836_get_arm_timer()->IRQClear = 1;
 	bcm2836_uart_send_byte('.');

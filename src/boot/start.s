@@ -28,11 +28,11 @@ software_interrupt_h: 		.word 	software_interrupt_vector
 prefetch_abort_h: 		    .word 	prefetch_abort_vector
 data_abort_h: 			    .word 	_reset
 unused_h: 			        .word 	_reset
-interrupt_h: 			    .word 	interrupt_vector
+interrupt_h: 			    .word 	irq
 fast_interrupt_h: 		    .word 	fast_interrupt_vector
 
 _reset:
-	mov r0, #0x8000
+    mov r0, #0x8000
 	mcr	p15, 4,	r0,	c12, c0, 0
 _stack_init:
 	// Initialize the stack pointer to 0x8000 (32kB of memory avalaible)
@@ -42,3 +42,10 @@ _stack_init:
 _inf_loop:
 	b	_inf_loop
 
+
+irq:
+    push {r0-r12,lr}
+    bl interrupt_vector
+    pop  {r0-r12,lr}
+    ;@subs pc,lr,#4
+    eret
